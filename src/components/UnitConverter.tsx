@@ -13,7 +13,7 @@ export const UnitConverter: React.FunctionComponent = () => {
     UnitsMap[type.key]
   );
   const [from, setFrom] = React.useState<IDropdownOption>(subTypes[0]);
-  const [to, setTo] = React.useState<IDropdownOption>(subTypes[0]);
+  const [to, setTo] = React.useState<IDropdownOption>(subTypes[1]);
   const [inputLeft, setInputLeft] = React.useState("0");
   const [inputRight, setInputRight] = React.useState("0");
 
@@ -45,9 +45,9 @@ export const UnitConverter: React.FunctionComponent = () => {
       const unitType = String(type.key);
       const fromUnit = String(from.key);
       const toUnit = String(to.key);
-      const value = Number(newValue || 0);
+      const value = newValue || "0";
       const result = convert(unitType, fromUnit, toUnit, value);
-      setInputRight(result.toFixed(3));
+      setInputRight(result);
     },
     [type, to, from]
   );
@@ -59,14 +59,18 @@ export const UnitConverter: React.FunctionComponent = () => {
       const unitType = String(type.key);
       const fromUnit = String(to.key);
       const toUnit = String(from.key);
-      const value = Number(newValue || 0);
+      const value = newValue || "0";
       const result = convert(unitType, fromUnit, toUnit, value);
-      setInputLeft(result.toFixed(3));
+      setInputLeft(result);
     },
     [type, to, from]
   );
 
   useEffect(() => setSubTypes(UnitsMap[type.key]), [type]);
+  useEffect(() => {
+    setFrom(subTypes[0]);
+    setTo(subTypes[1]);
+  }, [subTypes]);
 
   useEffect(() => {
     setInputLeft("0");
@@ -80,7 +84,7 @@ export const UnitConverter: React.FunctionComponent = () => {
       className="Unit__Converter"
       style={fullWidth}
     >
-      <Stack style={fullWidth} horizontal wrap tokens={{ childrenGap: 20 }}>
+      <Stack style={fullWidth} horizontal wrap>
         <Stack.Item grow>
           <Dropdown
             selectedKey={type ? type.key : undefined}
@@ -93,8 +97,8 @@ export const UnitConverter: React.FunctionComponent = () => {
 
       <br />
 
-      <Stack style={fullWidth} horizontal wrap tokens={{ childrenGap: 20 }}>
-        <Stack.Item grow>
+      <Stack style={fullWidth} horizontal wrap>
+        <Stack.Item className="Width__49 Padding__Right__1">
           <Dropdown
             selectedKey={from ? from.key : undefined}
             onChange={onFromChange}
@@ -102,7 +106,7 @@ export const UnitConverter: React.FunctionComponent = () => {
             options={subTypes}
           />
         </Stack.Item>
-        <Stack.Item grow>
+        <Stack.Item className="Width__49 Padding__Left__1">
           <Dropdown
             selectedKey={to ? to.key : undefined}
             onChange={onToChange}
@@ -114,11 +118,11 @@ export const UnitConverter: React.FunctionComponent = () => {
 
       <br />
 
-      <Stack style={fullWidth} horizontal wrap tokens={{ childrenGap: 20 }}>
-        <Stack.Item grow>
+      <Stack style={fullWidth} horizontal wrap>
+        <Stack.Item className="Width__49 Padding__Right__1">
           <TextField value={inputLeft} onChange={onChangeInputLeft} />
         </Stack.Item>
-        <Stack.Item grow>
+        <Stack.Item className="Width__49 Padding__Left__1">
           <TextField value={inputRight} onChange={onChangeInputRight} />
         </Stack.Item>
       </Stack>

@@ -19,9 +19,22 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 }
 
 .Base__Div .Unit__Converter {
   width: 100%;
   max-width: 700px;
+}
+
+.Width__49 {
+  width: 49%;
+}
+
+.Padding__Right__1{
+  padding-right: 1%;
+}
+
+.Padding__Left__1{
+  padding-left: 1%;
 }
