@@ -1,6 +1,6 @@
 # unit-converter
   
-https://bilal-akbar.github.io/unit-converter/
+https://bilalakbar.github.io/unit-converter/
 
 Sample React application that allows you to convert values between different units.
 
